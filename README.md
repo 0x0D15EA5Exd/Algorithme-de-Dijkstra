@@ -1,2 +1,2 @@
 # Algorithme de Dijkstra
- Algorithme de Dijkstra for school designed and coded via Ludo & Victor
+ Algorithme de Dijkstra for school designed and coded by Ludo & Victor
