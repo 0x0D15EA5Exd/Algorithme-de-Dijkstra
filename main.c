@@ -14,9 +14,9 @@ int main() {
 	int sommetDebut, sommetFin;
 	
 	printf("\nAlgo de Djisktra en C par Victor !");
-	printf("\nSommet de départ : ");
-	scanf("%d", &sommetDebut);						// Bla bla conventionnel pour	Depart et arrivée . 
-	printf("\Sommet d'arrivée : ");
+	printf("\nSommet de dÃ©part : ");
+	scanf("%d", &sommetDebut);						// Bla bla conventionnel pour	Depart et arrivÃ©e . 
+	printf("\Sommet d'arrivÃ©e : ");
 	scanf("%d", &sommetFin);
 
 	//printf("Le chemin le plus rapide entre %d et %d est de",);
@@ -49,7 +49,7 @@ int findMinNodes(int currentNode) {
 		{
 			distMini = dist[sommetStart][j]; // la distance la plus petite vers le prochain sommet = distMini
 			dist[sommetStart][j] = LONG_MAX;
-											 // En principe ça doit prendre la valeur de J qui donne le sommet selectionné (marche pas)
+											 // En principe Ã§a doit prendre la valeur de J qui donne le sommet selectionnÃ© (marche pas)
 		}
 		
 	}
@@ -116,3 +116,5 @@ int dijsktra(int sommetDebut, int sommetFin){
 }
 
 */
+
+// Rajouter un comaparaison des chemins avec strcut et .... du style chemin abfed = 6 << abefd = 8
