@@ -2,12 +2,13 @@
 #include <stdlib.h>
 #include <math.h>
 #include <string.h>
-
+#include <limits.h>
 
 int dist[10][10] = { {-1,5,-1,-1,-1,-1},{5,-1,-1,4,6,-1,3},{-1,4,-1,-1,7,-1},{-1,6,-1,-1,5,3},{-1,-1,7,5,-1,-1},{-1,3,-1,2,-1,-1} };// TABLEAU globale des distance entre les noeuds 
 char adressChar;
 
-int sommetSelectione;
+int SOMMET_SELECTION;
+int a;
 
 int findMinNodes(int); //chercher sommet le plus proche 
 
@@ -17,56 +18,56 @@ int findMinNodes(int); //chercher sommet le plus proche
 
 int main() {
 
-	int sommetDebut, sommetFin;
+	int currentNode, endNode;
 	
 	printf("\nAlgo de Djisktra en C par Victor !");
 	printf("\nSommet de départ : ");
-	scanf("%d", &sommetDebut);						// Bla bla conventionnel pour	Depart et arrivée . 
+	scanf("%d", &currentNode);						// Bla bla conventionnel pour	Depart et arrivée . 
 	printf("\nSommet d'arrivée : ");
-	scanf("%d", &sommetFin);
+	scanf("%d", &endNode);
 
+	a = currentNode;
 	//printf("Le chemin le plus rapide entre %d et %d est de",);
-	printf("Distance Mini = %d, sommet seletionné = %c", findMinNodes(sommetDebut));
+	printf("0 -> A | 1 -> B | 2 -> C | 3 -> D | 4 -> E | 5 -> F");
 }
 
 int findMinNodes(int currentNode) {
-
-	/*
-Trouve_min(Q)
-1 mini : = infini
-2 sommet : = -1
-3 pour chaque sommet s de Q
-4    si distanceSommet	< mini
-	5    alors
-	6        mini : = distance sommet
-	7        sommet : = s
-	8 renvoyer sommet
-	*/
-
-	// sommet recu -> 1
-	int sommetStart;
-	int distMini = 150;
-	int sommetSelectione;
+	
 	int j;
+	int DistMini;
 	//int tmpTab[6];
-
-	sommetStart = currentNode;
-
+	// TABLEAU ICI ET PAS EN VARIABLE GLOBALE 	
 	for ( j = 0; j < 6; j++)
 	{
-		if (dist[sommetStart][j] != -1 && dist[sommetStart][j] < distMini) //si y'a un lien vers le somet suivant + si la d[s] < mini = a LONG_MAX (valeur d'un long)
+		if (dist[currentNode][j] != -1 && dist[currentNode][j] < distMini && dist[currentNode][j] != INT_MAX) //si y'a un lien vers le somet suivant + si la d[s] < mini = a LONG_MAX (valeur d'un long)
 		{
 			distMini = dist[sommetStart][j]; // la distance la plus petite vers le prochain sommet = distMini
-			sommetSelectione = j; // index du sommet selectionné*
-			
-			break;	
+			SOMMET_SELECTION = j; // index du sommet selectionné
+			dist[current][j] = INT_MAX;
 		}	
 	}
 	return distMini;
 }
 
-
-
-
-int dijsktra(int sommetDebut, int sommetFin){	
+int dijsktra(int current, int endNode){	
+	int dist_Current_Test, Dist_Mini,Dist_Mini;
+	int MAX_LENGHT_PATH = INT_MAX; 
+	
+	while (SOMMET_SELECTION != sommetFin && dist_Total < MAX_LENGHT_PATH)
+	{
+		if (dist_Current_Test > MAX_LENGHT_PATH)
+		{
+				break; 
+				currentNode = a;
+		}	
 		
+		dist_Mini += findMinNodes(SOMMET_SELECTION);
+		SOMMET_SELECTION++;
+	}
+	
+if ( dist_Current_Test < Dist_Mini){
+			
+			Dist_Mini = dist_Current_Test;
+		}
+	return Dist_Mini;
+}
