@@ -3,71 +3,167 @@
 #include <math.h>
 #include <string.h>
 #include <limits.h>
+#include <float.h>
 
-int dist[10][10] = { {-1,5,-1,-1,-1,-1},{5,-1,-1,4,6,-1,3},{-1,4,-1,-1,7,-1},{-1,6,-1,-1,5,3},{-1,-1,7,5,-1,-1},{-1,3,-1,2,-1,-1} };// TABLEAU globale des distance entre les noeuds 
-char adressChar;
+#define ANSI_COLOR_RED     "\x1b[31m"
+#define ANSI_COLOR_GREEN   "\x1b[32m"
+#define ANSI_COLOR_YELLOW  "\x1b[33m"
+#define ANSI_COLOR_BLUE    "\x1b[34m"
+#define ANSI_COLOR_MAGENTA "\x1b[35m"
+#define ANSI_COLOR_CYAN    "\x1b[36m"
+#define ANSI_COLOR_RESET   "\x1b[0m"
+ 
+#define INF 9999
 
-int SOMMET_SELECTION;
-int a;
-
-int findMinNodes(int); //chercher sommet le plus proche 
-
-//char* pathInChar(int); // Créer une chaine de caractère du style abcdef qui donne la suite des sommets à emprunter pour être le plus rapide
 
 
+
+void menu();
+
+void dijsktra(float,float,int);
 
 int main() {
 
-	int currentNode, endNode;
-	
-	printf("\nAlgo de Djisktra en C par Victor !");
-	printf("\nSommet de départ : ");
-	scanf("%d", &currentNode);						// Bla bla conventionnel pour	Depart et arrivée . 
-	printf("\nSommet d'arrivée : ");
-	scanf("%d", &endNode);
+	menu();
 
-	a = currentNode;
-	//printf("Le chemin le plus rapide entre %d et %d est de",);
-	printf("0 -> A | 1 -> B | 2 -> C | 3 -> D | 4 -> E | 5 -> F");
+	printf(ANSI_COLOR_RED"\n\n TERMINE"ANSI_COLOR_RESET);
+	printf(ANSI_COLOR_RED "\n\n Developpe par Victor & Ludo"ANSI_COLOR_RESET);
+	printf(ANSI_COLOR_RED"\n\n Avec l'aide de James pour le debuggage et la correction de bug mineur ainsi que INTERNET"ANSI_COLOR_RESET);
+	// FIN DU PROGRAMME 
+
 }
 
-int findMinNodes(int currentNode) {
-	
-	int j;
-	int DistMini;
-	//int tmpTab[6];
-	// TABLEAU ICI ET PAS EN VARIABLE GLOBALE 	
-	for ( j = 0; j < 6; j++)
-	{
-		if (dist[currentNode][j] != -1 && dist[currentNode][j] < distMini && dist[currentNode][j] != INT_MAX) //si y'a un lien vers le somet suivant + si la d[s] < mini = a LONG_MAX (valeur d'un long)
-		{
-			distMini = dist[sommetStart][j]; // la distance la plus petite vers le prochain sommet = distMini
-			SOMMET_SELECTION = j; // index du sommet selectionné
-			dist[current][j] = INT_MAX;
-		}	
+
+
+void menu() {
+
+	float arrivee, depart;
+	int n;
+	// Menu de dialogue 
+	printf(ANSI_COLOR_MAGENTA "\n Algoo de Djisktra en C par Victor & Ludo !");
+
+	printf("\n\nSommet de depart : ");
+	scanf("%f",&arrivee);
+
+
+	printf("\n\nSommet d'arrivé : ");
+	scanf("%f",&depart);
+
+
+	printf("\n\nN : ");
+	scanf("%d", &n); // nombre de sommet
+
+	if (arrivee == depart) {
+		printf(ANSI_COLOR_RED "Ca n'existe pas ! " ANSI_COLOR_RESET);
+		exit(0);
 	}
-	return distMini;
-}
-
-int dijsktra(int current, int endNode){	
-	int dist_Current_Test, Dist_Mini,Dist_Mini;
-	int MAX_LENGHT_PATH = INT_MAX; 
-	
-	while (SOMMET_SELECTION != sommetFin && dist_Total < MAX_LENGHT_PATH)
-	{
-		if (dist_Current_Test > MAX_LENGHT_PATH)
-		{
-				break; 
-				currentNode = a;
-		}	
 		
-		dist_Mini += findMinNodes(SOMMET_SELECTION);
-		SOMMET_SELECTION++;
-	}
-	
-if ( dist_Current_Test < Dist_Mini){
-			
-			Dist_Mini = dist_Current_Test;
+	dijsktra(arrivee, depart,n);
+}
+
+void dijsktra(float noeudDarrivee,float noeudDeDepart,int n){
+
+	float ville[16][16] = {
+			{-1, 71.4, -1, -1, 58, -1, -1, 85.1, -1, -1, -1, -1, -1, -1, -1, -1},
+			{71.4, -1, 48.4, -1, 81.3, -1, -1, 68.5, -1, -1, -1, -1, -1, -1, -1},
+			{-1, 48.4, -1, 23, -1, 74.6, -1, 54.3, 138, -1, -1, -1, -1, -1, -1, -1},
+			{-1, -1, 23, -1, -1, -1, -1, -1, -1, 60.5, 87.6, -1, -1, 16.1, -1, -1},
+			{58, 81.3, -1, -1, -1, 116, 37.9, 50.5, 88.7, -1, 164, -1, -1, -1, -1, -1},
+			{-1, -1, 74.6, -1, 116, -1, 95.4, 60.1, 66.5, 53.2, 47.9, 111, -1, 47.7, 125, -1},
+			{-1, -1, -1, -1, 37.9, 95.4, -1, 60.7, 61, -1, -1, -1, -1, -1, -1, -1},
+			{85.1, 68.5, 54.3, -1, 50.5, 60.1, 60.7, -1, 83.1, -1, 118, 156, -1, 65.8, -1, -1},
+			{-1, -1, 138, -1, 88.7, 66.5, 61, 83.1, -1, -1, 91.5, 99.7, -1, -1, 90.3, -1},
+			{-1, -1, -1, 60.5, -1, 53.2, -1, -1, -1, -1, 48.7, -1, 116, 50, -1, 62.9},
+			{-1, -1, -1, 87.6, 164, 47.9, -1, 118, 91.5, 48.7, -1, 68.7, 129, 74.3, 102, 44.8},
+			{-1, -1, -1, -1, -1, 111, -1, 156, 99.7, -1, 68.7, -1, 111, 141, 69.1, 66.9},
+			{-1, -1, -1, -1, -1, -1, -1, -1, -1, 116, 129, 111, -1, -1, -1, 71.9},
+			{-1, -1, -1, 16.1, -1, 47.7, -1, 65.8, -1, 50, 74.3, 141, -1, -1, -1, -1},
+			{-1, -1, -1, -1, -1, 125, -1, -1, 90.3, -1, 102, 69.1, -1, -1, -1, -1},
+			{-1, -1, -1, -1, -1, -1, -1, -1, -1, 62.9, 44.8, 66.9, 71.9, -1, -1, -1},
+	};
+	float coutNoeud[16][16]; // copie du tableau précedent;
+	float noeudVisite[99]; //Historique des noeuds visités 
+	float predecesseur[99]; //tableau prédécesseur 
+	float distMini = INF; // distance Mini setup a valeur max pour première vérification pour que ça soit strictement inférieure à l'infini
+	float noeudSuivant; // Noeud suivant pour opérer les tests dans les tableaux 
+	int i, j; // ittérateur des tableaux (ittérateur c'est le mot exact Ludo) 
+	float distance[99]; // stocke la distance entre les noeuds 
+	int count; // nombre de test à effectuer. 
+
+	/*Permet de savoir si il existe un lien entre les neouds.
+	( équivalent de -1 dans le tableau )
+	Sauf que pour pas que ça soit le bazar dans les tests 
+	et la réecriture en INT_MAX pour marquer le passage par se chemin c'est plus pratique
+	 /!\ Abandonnée en cours de route les INT_MAX un tableau des poids entre les différents noeuds sera plus simple  
+	*/
+	// C'est possible de sans passer à condition de réécrire la matrice mais un peu la flemme
+	for ( i = 0; i < n; i++)
+	{
+		for ( j = 0; j < n; j++)
+		{
+			if (ville[i][j] == -1)
+				coutNoeud[i][j] = INF;
+			else
+				coutNoeud[i][j] = ville[i][j];
 		}
-	return Dist_Mini;
+	}
+	//Initialisation des tableaux : prédecesseur + distance + noeudVisité.
+	for (i = 0; i < n ; i++)
+	{
+		predecesseur[i] = noeudDeDepart;
+		noeudVisite[i] = 0;
+		distance[i] = coutNoeud[(int)noeudDeDepart][i];
+	}
+
+	distance[(int)noeudDeDepart] = 0;
+	noeudVisite[(int)noeudDeDepart] = 1;
+	count = 1;
+
+	while (count<n-1) { // count = cmb on veut sortir de 
+
+		// tant que le noeud suivant n'est pas le noeuds d'arrivé alors : 
+
+		for (i = 0; i < n; i++) {
+			if (distance[i] < distMini&&!noeudVisite[i])
+			{
+				//Correspond au chemin le plus court 
+				// si la distance est < la distance minimun ET que la distance est différente d'un noeud visité alors 
+				// les variables suivantes prennent les valeurs noeuds suivant = l'index de I ET distance Mini prend la valeur 
+				// de distance de i 
+				distMini = distance[i];
+				noeudSuivant = i;
+			}
+
+
+			//vérification de l'existance d'un meilleur chemin après avec le noeud suivant 
+			noeudVisite[i] = 1;
+			for (i = 0; i < n; i++)
+				if (!noeudVisite[i]) // ! non logique 
+					if (distMini + coutNoeud[(int)noeudSuivant][i] < distance[i])
+					{
+						// Si la distance minimun + le cout vers la suivante est < à distance[i]
+						// Alors on affecte les valeurs suivante : 
+						distance[i] = distMini + coutNoeud[(int)noeudSuivant][i];
+						predecesseur[i] = noeudSuivant;
+					}
+		}
+		count++;
+	}
+	// Affice le chemlin et la distance entre chaque noeud
+	for (i = 0; i < n; i++){
+		if (i != noeudDeDepart)
+		{
+			printf("\n La dsitance du noeud %d = %f", i, distance[i]);
+			printf("\nChemin = %d ", i);
+			j = i;
+			do
+			{
+				j = predecesseur[j];
+				printf("<-%d", j);
+				
+
+			}while (j != noeudDeDepart);
+		}
+	}
+		
 }
