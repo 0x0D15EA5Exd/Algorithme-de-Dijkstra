@@ -88,7 +88,9 @@ void dijsktra(float noeudDarrivee,float noeudDeDepart,int n){
 	float noeudSuivant; // Noeud suivant pour opérer les tests dans les tableaux 
 	int i, j; // ittérateur des tableaux (ittérateur c'est le mot exact Ludo) 
 	float distance[99]; // stocke la distance entre les noeuds 
-	int count; // nombre de test à effectuer. 
+	int count; // nombre de sommet. 
+	float TOTAL_CHEMIN = 0; // Longeur total ;
+
 
 	/*Permet de savoir si il existe un lien entre les neouds.
 	( équivalent de -1 dans le tableau )
@@ -119,12 +121,12 @@ void dijsktra(float noeudDarrivee,float noeudDeDepart,int n){
 	noeudVisite[(int)noeudDeDepart] = 1;
 	count = 1;
 
-	while (count<n-1) { // count = cmb on veut sortir de 
+	while (count<n) { // count = cmb on veut sortir de 
 
 		// tant que le noeud suivant n'est pas le noeuds d'arrivé alors : 
 
 		for (i = 0; i < n; i++) {
-			if (distance[i] < distMini&&!noeudVisite[i])
+			if (distance[i] < distMini&&!noeudVisite[i]&&!INF)
 			{
 				//Correspond au chemin le plus court 
 				// si la distance est < la distance minimun ET que la distance est différente d'un noeud visité alors 
@@ -153,17 +155,22 @@ void dijsktra(float noeudDarrivee,float noeudDeDepart,int n){
 	for (i = 0; i < n; i++){
 		if (i != noeudDeDepart)
 		{
-			printf("\n La dsitance du noeud %d = %f", i, distance[i]);
-			printf("\nChemin = %d ", i);
-			j = i;
-			do
-			{
-				j = predecesseur[j];
-				printf("<-%d", j);
-				
+			if (distance[i] != INF) {
+				printf("\n La distance vers le noeud %d = %f", i, distance[i]);
+				printf("\nChemin = %d ", i);
+				j = i;
+				TOTAL_CHEMIN = TOTAL_CHEMIN + distance[i];
+				do
+				{
+					j = predecesseur[j];
+					printf(" vers %d", j);
 
-			}while (j != noeudDeDepart);
+
+				} while (j != noeudDeDepart);
+			}
+			
 		}
 	}
+	printf("\n\nTotal = %f");
 		
 }
