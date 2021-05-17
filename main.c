@@ -3,7 +3,7 @@
 #include <math.h>
 #include <string.h>
 #include <limits.h>
-#include <float.h>
+
 
 #define ANSI_COLOR_RED     "\x1b[31m"
 #define ANSI_COLOR_GREEN   "\x1b[32m"
@@ -26,9 +26,9 @@ int main() {
 
 	menu();
 
-	printf(ANSI_COLOR_RED"\n\n TERMINE"ANSI_COLOR_RESET);
-	printf(ANSI_COLOR_RED "\n\n Developpe par Victor & Ludo"ANSI_COLOR_RESET);
-	printf(ANSI_COLOR_RED"\n\n Avec l'aide de James pour le debuggage et la correction de bug mineur ainsi que INTERNET"ANSI_COLOR_RESET);
+	printf(ANSI_COLOR_RED"\n\nTERMINE"ANSI_COLOR_RESET);
+	printf(ANSI_COLOR_RED "\n\nDeveloppe par Victor & Ludo"ANSI_COLOR_RESET);
+	printf(ANSI_COLOR_RED"\n\nAvec l'aide de James pour le debuggage et la correction de bug mineur ainsi que INTERNET"ANSI_COLOR_RESET);
 	// FIN DU PROGRAMME 
 
 }
@@ -38,20 +38,17 @@ int main() {
 void menu() {
 
 	float arrivee, depart;
-	int n;
+	int n = 16;
 	// Menu de dialogue 
 	printf(ANSI_COLOR_MAGENTA "\n Algoo de Djisktra en C par Victor & Ludo !");
 
 	printf("\n\nSommet de depart : ");
-	scanf("%f",&arrivee);
-
-
-	printf("\n\nSommet d'arrivé : ");
 	scanf("%f",&depart);
 
 
-	printf("\n\nN : ");
-	scanf("%d", &n); // nombre de sommet
+	printf("\n\nSommet d'arrivé : ");
+	scanf("%f",&arrivee);
+
 
 	if (arrivee == depart) {
 		printf(ANSI_COLOR_RED "Ca n'existe pas ! " ANSI_COLOR_RESET);
@@ -121,7 +118,7 @@ void dijsktra(float noeudDarrivee,float noeudDeDepart,int n){
 	noeudVisite[(int)noeudDeDepart] = 1;
 	count = 1;
 
-	while (count<n) { // count = cmb on veut sortir de 
+	while (count<n-1) { // nombre de sommet c'est 16
 
 		// tant que le noeud suivant n'est pas le noeuds d'arrivé alors : 
 
@@ -156,10 +153,10 @@ void dijsktra(float noeudDarrivee,float noeudDeDepart,int n){
 		if (i != noeudDeDepart)
 		{
 			if (distance[i] != INF) {
-				printf("\n La distance vers le noeud %d = %f", i, distance[i]);
+				printf("\nLa distance vers le noeud %d = %.1f", i, distance[i]);
 				printf("\nChemin = %d ", i);
 				j = i;
-				TOTAL_CHEMIN = TOTAL_CHEMIN + distance[i];
+				TOTAL_CHEMIN += (float)distance[i];
 				do
 				{
 					j = predecesseur[j];
@@ -171,6 +168,6 @@ void dijsktra(float noeudDarrivee,float noeudDeDepart,int n){
 			
 		}
 	}
-	printf("\n\nTotal = %f");
+	printf("\n\nTotal = %.2lf",TOTAL_CHEMIN);
 		
 }
